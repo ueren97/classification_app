@@ -66,7 +66,7 @@ def model_eval(model, X, y):
 
     scores = model.evaluate(X, y, verbose=1)
 
-    # ref: model.compile(loss='categorical_crossentropy',
+    # reference: model.compile(loss='categorical_crossentropy',
     #                     optimizer=opt, metrics=['accuracy'])
     print('Test Loss: ', scores[0])
     print('Test Accuracy: ', scores[1])
