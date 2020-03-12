@@ -10,7 +10,7 @@ num_classes = len(classes)
 image_size = 50
 
 
-# メインの関数を定義する
+# define main function
 def main():
     X_train, X_test, y_train, y_test = np.load(
         './img.npy', allow_pickle=True)
@@ -55,7 +55,7 @@ def model_train(X, y):
 
     model.fit(X, y, batch_size=32, epochs=100)
 
-    # モデルの保存
+    # save model
     model.save('./img_cnn.h5')
 
     return model
@@ -66,7 +66,7 @@ def model_eval(model, X, y):
 
     scores = model.evaluate(X, y, verbose=1)
 
-    # 参考: model.compile(loss='categorical_crossentropy',
+    # reference: model.compile(loss='categorical_crossentropy',
     #                     optimizer=opt, metrics=['accuracy'])
     print('Test Loss: ', scores[0])
     print('Test Accuracy: ', scores[1])
