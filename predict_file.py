@@ -4,7 +4,7 @@ from flask import Flask
 from flask import flash
 from flask import request
 from flask import redirect
-from werkzeug.utils import secure_filename  # ファイル名をチェックする関数
+from werkzeug.utils import secure_filename  # function to check file
 
 from keras.models import load_model
 
@@ -27,6 +27,7 @@ app.secret_key = "super secret key"
 
 def allowed_file(filename):
     # アップロード可能な関数かどうかを判定
+    # judge whether the function is uploadable or not
     return '.' in filename and\
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
@@ -35,11 +36,11 @@ def allowed_file(filename):
 def upload_file():
     if request.method == 'POST':
         if 'file' not in request.files:
-            flash('ファイルがありません')
+            flash('no file')
             return redirect(request.url)
         file = request.files['file']
         if file.filename == '':
-            flash('ファイルがありません')
+            flash('no file')
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
@@ -60,7 +61,7 @@ def upload_file():
             predicted = result.argmax()
             percentage = int(result[predicted] * 100)
 
-            return "ラベル: " + classes[predicted] + ", 確率: " \
+            return "label: " + classes[predicted] + ", probability: " \
                 + str(percentage) + " %"
 
         # return redirect(url_for('uploaded_file', filename=filename))
@@ -70,9 +71,9 @@ def upload_file():
     <html>
     <head>
     <meta charset="UTF-8">
-    <title>ファイルをアップロードして判定しよう</title></head>
+    <title>Judge the image!</title></head>
     <body>
-    <h1>ファイルをアップロードして判定しよう！</h1>
+    <h1>Judge the image!</h1>
     <form method = post enctype = multipart/form-data>
     <p><input type=file name=file>
     <input type=submit value=Upload>
