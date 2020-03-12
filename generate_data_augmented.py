@@ -56,4 +56,4 @@ y_test = np.array(Y_test)
 xy = (X_train, X_test, y_train, y_test)
 
 # save 4 variables to one file
-np.save('./animal_augmented.npy', xy)
+np.save('./img_augmented.npy', xy)
